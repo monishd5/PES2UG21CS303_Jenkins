@@ -1,28 +1,28 @@
 pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                build 'PES2UG21CS303-1'
-                sh 'nonexistent-command'  // Intentional error here
-                echo 'Build Successful!'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh './task5'
-                echo 'Test Successful!'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Successfully deployed!'
-            }
-        }
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        build 'PES2UG21CS303-1'
+        sh 'g++ -o task5 main/hello2.cpp'
+        echo 'Build Successful!'
+      }
     }
-    post {
-        failure {
-            echo 'Pipeline Failed!'
-        }
+    stage('Test') {
+      steps {
+        sh './task5'
+        echo 'Test Successful!'
+      }
     }
+    stage('Deploy') {
+      steps {
+        echo 'Successfully deployed!'A
+      }
+    }
+  }
+  post {
+    failure {
+      echo 'Pipeline Failed!'
+    }
+  }
 }
