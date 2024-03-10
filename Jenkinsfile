@@ -1,34 +1,27 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-              build 'PES2UG21CS303-1'
-              sh 'g++ -o main.cpp -o output'
-                }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                script {
-                    sh './output'
-                }
-            }
-        }
-        
-        stage('Deploy'){
-          steps {
-            echo 'deploy'
-          }
-       }
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        sh 'g++ -o task5 main/main.cpp'
+        echo 'Build Successful!'
+      }
     }
-
-    post {
-        failure {
-            echo 'Pipeline failed'
-        }
+    stage('Test') {
+      steps {
+        sh './task5'
+        echo 'Test Successful!'
+      }
     }
+    stage('Deploy') {
+      steps {
+        echo 'Successfully deployed!'
+      }
+    }
+  }
+  post {
+    failure {
+      echo 'Pipeline Failed!'
+    }
+  }
 }
--
